@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+/**
+ * 具体的项目
+ */
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.admin.festec.example"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+/*
+ * 为了让代码变得 简洁，将通用的库挪走
+ * annotationProcessor 注解处理器，javac内置的一个用于编译时扫描和处理注解(注释)的工具
+ * 在源代码编译阶段，通过注解处理器，我们可以获取文件内注解 相关内容
+ *
+ * annotationProcessor 用途：可以在编译器将通过注解处理 器进行我们需要的操作。
+ * 比较常用的就是在编译几天获取相关注解数据，然后动态生成的.java 文件，通常是自动产生一些有规律的文件。
+ *
+ */
+dependencies {
+    //使用了 api 之后：不用重复的添加依赖文件，只要你依赖的某个module/library 有该依赖，则不需要重复添加依赖。
+
+    //implementation : 只能在内部使用该模块，比如我在一个library中使用 implementation 依赖了gson 库，
+    //然后我的主项目依赖了 library ，那么我的主项目就无法方法gson库中的方法。这样的好处是 编译速度回加快，
+    // 推荐使用implementation 方法去添加依赖，如果需要提供给外部访问，那么使用api 依赖即可。
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':latte_ec')
+    annotationProcessor project(':latte_compiler')
+}
