@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.diabin.latte" />
+    package="com.diabin.latte" >
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+</manifest>

@@ -30,7 +30,6 @@ android {
  */
 dependencies {
     //使用了 api 之后：不用重复的添加依赖文件，只要你依赖的某个module/library 有该依赖，则不需要重复添加依赖。
-
     //implementation : 只能在内部使用该模块，比如我在一个library中使用 implementation 依赖了gson 库，
     //然后我的主项目依赖了 library ，那么我的主项目就无法方法gson库中的方法。这样的好处是 编译速度回加快，
     // 推荐使用implementation 方法去添加依赖，如果需要提供给外部访问，那么使用api 依赖即可。
