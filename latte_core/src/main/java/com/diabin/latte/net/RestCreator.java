@@ -19,7 +19,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * @file: RestCreator
  * @author: 345
  * @Time: 2019/4/17 19:19
- * @description: ${DESCRIPTION}
+ * @description: Creator：创造者
  */
 public class RestCreator {
 

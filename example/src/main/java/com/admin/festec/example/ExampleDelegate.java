@@ -12,6 +12,7 @@ import com.diabin.latte.net.RestClient;
 import com.diabin.latte.net.callback.IError;
 import com.diabin.latte.net.callback.IFailure;
 import com.diabin.latte.net.callback.ISuccess;
+import com.diabin.latte.ui.LoaderStyle;
 
 /**
  * Copyright (C)
@@ -39,7 +40,7 @@ public class ExampleDelegate extends LatteDelegate {
                            @Override
                            public void OnSuccess(String response) {
                                Log.e("TAG", "OnSuccess: "+response );
-                               Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
+//                               Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
                            }
                        })
                        .ifailure(new IFailure() {
