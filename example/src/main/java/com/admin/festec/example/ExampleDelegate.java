@@ -56,6 +56,6 @@ public class ExampleDelegate extends LatteDelegate {
                            }
                        })
                        .build()
-                       .get();
+                       .download();
            }
 }

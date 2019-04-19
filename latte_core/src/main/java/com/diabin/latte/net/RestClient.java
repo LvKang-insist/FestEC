@@ -1,5 +1,6 @@
 package com.diabin.latte.net;
 
+import android.app.DownloadManager;
 import android.app.Service;
 import android.content.Context;
 import android.util.Log;
@@ -10,6 +11,7 @@ import com.diabin.latte.net.callback.IFailure;
 import com.diabin.latte.net.callback.IReqeust;
 import com.diabin.latte.net.callback.ISuccess;
 import com.diabin.latte.net.callback.RequestCallback;
+import com.diabin.latte.net.download.DownloadHandler;
 import com.diabin.latte.ui.LatteLoader;
 import com.diabin.latte.ui.LoaderStyle;
 
@@ -39,6 +41,9 @@ public class RestClient {
     private final String URL;
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
     private final IReqeust REQUEST;
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
@@ -49,6 +54,9 @@ public class RestClient {
 
     public RestClient(String url,
                       Map<String, Object> params,
+                      String download_dir,
+                      String extension,
+                      String name,
                       IReqeust reqeust,
                       ISuccess success,
                       IFailure failure,
@@ -59,6 +67,9 @@ public class RestClient {
                       Context context) {
         this.URL = url;
         params.putAll(params);
+        this.DOWNLOAD_DIR = download_dir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.REQUEST = reqeust;
         this.SUCCESS = success;
         this.FAILURE = failure;
@@ -103,10 +114,15 @@ public class RestClient {
                 call = service.delete(URL, PARAMS);
                 break;
             case UPLOAD:
-                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()),FILE);
+                /**
+                 *  RequestBody Json数据提交：
+                 *  FormBody 表单数据提交:
+                 *  MultipartBody 文件上传
+                 */
+                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
                 final MultipartBody.Part body =
-                        MultipartBody.Part.createFormData("file",FILE.getName(),requestBody);
-                call = RestCreator.getRestService().upload(URL,body);
+                        MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
+                call = RestCreator.getRestService().upload(URL, body);
             default:
 
                 break;
@@ -159,6 +175,14 @@ public class RestClient {
 
     public final void delete() {
         request(HttpMethod.DELETE);
+    }
+    public final void upload(){
+        request(HttpMethod.UPLOAD);
+    }
+
+    public final void download(){
+        new DownloadHandler(URL,REQUEST,DOWNLOAD_DIR,EXTENSION,NAME,SUCCESS,FAILURE,ERROR)
+                .handleDownload();
     }
 
 }

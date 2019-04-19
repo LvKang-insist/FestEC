@@ -1,7 +1,5 @@
 package com.diabin.latte.ui;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;
 import android.view.Gravity;
@@ -9,11 +7,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.diabin.latte.R;
-import com.diabin.latte.util.DimenUtil;
+import com.diabin.latte.util.dimen.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
 
 /**
  * Copyright (C)
