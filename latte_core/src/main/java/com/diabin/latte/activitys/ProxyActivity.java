@@ -17,8 +17,8 @@ import me.yokeyword.fragmentation.SupportActivity;
  * 创建人: 345
  * 创建时间: 2019/4/15 20:18
  * 描述:  Activity 继承自 SupportActivity
+ *        Fragmentation 提供的 SupportActivity
  */
-//Fragmentation 提供的 SupportActivity
 public abstract class ProxyActivity extends SupportActivity {
 
     /**

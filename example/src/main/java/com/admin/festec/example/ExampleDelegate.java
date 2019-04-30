@@ -4,15 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.diabin.latte.app.Latte;
 import com.diabin.latte.deleggate.LatteDelegate;
+import com.diabin.latte.ec.sign.SignHandler;
 import com.diabin.latte.net.RestClient;
 import com.diabin.latte.net.callback.IError;
 import com.diabin.latte.net.callback.IFailure;
 import com.diabin.latte.net.callback.ISuccess;
-import com.diabin.latte.ui.LoaderStyle;
 
 /**
  * Copyright (C)
@@ -34,11 +32,12 @@ public class ExampleDelegate extends LatteDelegate {
 
     private void testRestClient(){
                RestClient.builder()
-                       .url("5981207.html")
+                       .url("7myrTU775c5f6e69260fc1ab51784a399333d5030c36288?uri=sign_in")
                        .loader(getContext())
                        .success(new ISuccess() {
                            @Override
                            public void OnSuccess(String response) {
+
                                Log.e("TAG", "OnSuccess: "+response );
 //                               Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
                            }
@@ -56,6 +55,6 @@ public class ExampleDelegate extends LatteDelegate {
                            }
                        })
                        .build()
-                       .download();
+                       .post();
            }
 }

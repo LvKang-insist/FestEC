@@ -1,6 +1,7 @@
 package com.diabin.latte.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 import java.util.HashMap;
 
@@ -13,26 +14,54 @@ import java.util.HashMap;
  */
 public final class Latte {
 
+    private final static Handler HEADLER = new Handler();
+
+    /**
+     * @return 返回一个handler 对象
+     *
+     */
+    public static Handler getHandler(){
+        return HEADLER;
+    }
     /**
      * @param context context
      * @return 返回配置对象
      */
-    public static Configurator init(Context context){
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(),context);
+    public static Configurator init(Context context) {
+        //保存 Context
+        getConfigurations()
+                .put(ConfigType.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
+
 
     /**
      * @return 返回 配置信息
      */
-    public static HashMap<String ,Object> getConfigurations(){
+    public static HashMap<Object, Object> getConfigurations() {
         return Configurator.getInstance().getLatteConfigs();
+    }
+
+    /**
+     * @return 返回单例
+     */
+    public static Configurator getConfigurator() {
+        return Configurator.getInstance();
+    }
+
+    /**
+     * @param key 要查询的键
+     * @param <T> 调用的类型
+     * @return 返回值为调用的类型
+     */
+    public static <T> T getConfiguration(Object key) {
+        return getConfigurator().getConfiguration(key);
     }
 
     /**
      * @return 返回 Context
      */
-    public static Context  getApplication(){
-        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
+    public static Context getApplication() {
+        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT);
     }
 }

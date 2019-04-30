@@ -1,10 +1,6 @@
 package com.diabin.latte.net;
 
-import android.app.DownloadManager;
-import android.app.Service;
 import android.content.Context;
-import android.util.Log;
-import android.view.WindowManager;
 
 import com.diabin.latte.net.callback.IError;
 import com.diabin.latte.net.callback.IFailure;
@@ -12,12 +8,10 @@ import com.diabin.latte.net.callback.IReqeust;
 import com.diabin.latte.net.callback.ISuccess;
 import com.diabin.latte.net.callback.RequestCallback;
 import com.diabin.latte.net.download.DownloadHandler;
-import com.diabin.latte.ui.LatteLoader;
-import com.diabin.latte.ui.LoaderStyle;
+import com.diabin.latte.ui.loader.LatteLoader;
+import com.diabin.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -26,8 +20,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.http.Url;
 
 /**
  * Copyright (C)
@@ -80,11 +72,16 @@ public class RestClient {
         this.CONTEXT = context;
     }
 
+    /**
+     * @return 返回一个建造者，来对需要的属性进行初始化
+     */
     public static RestClientBuilder builder() {
         return new RestClientBuilder();
     }
 
+
     private void request(HttpMethod method) {
+        // 获取网络接口请求的实例
         final RestService service = RestCreator.getRestService();
         Call<String> call = null;
 
@@ -94,6 +91,7 @@ public class RestClient {
         if (LOADER_STYLE != null) {
             LatteLoader.showLoading(CONTEXT, LOADER_STYLE);
         }
+        //判断要进行什么网络请求，然后创建请求的实例
         switch (method) {
             case GET:
                 call = service.get(URL, PARAMS);
@@ -114,6 +112,7 @@ public class RestClient {
                 call = service.delete(URL, PARAMS);
                 break;
             case UPLOAD:
+
                 /**
                  *  RequestBody Json数据提交：
                  *  FormBody 表单数据提交:
@@ -133,6 +132,7 @@ public class RestClient {
              *      同步：调用Call对象的execute()，返回结果的响应体
              *      异步：调用Call对象的enqueue()，参数是一个回调
              */
+            //异步请求，传入一个自定义的CallBack ，
             call.enqueue(getRequestCallback());
         }
     }
@@ -147,10 +147,16 @@ public class RestClient {
         );
     }
 
+    /**
+     * get 请求
+     */
     public final void get() {
         request(HttpMethod.GET);
     }
 
+    /**
+     * post 请求
+     */
     public final void post() {
         if (BODY == null) {
             request(HttpMethod.POST);

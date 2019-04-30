@@ -3,6 +3,10 @@ package com.admin.festec.example;
 import android.app.Application;
 
 import com.diabin.latte.app.Latte;
+import com.diabin.latte.ec.database.DatabaseManager;
+import com.diabin.latte.ec.icon.FontEcModule;
+import com.diabin.latte.net.interceptors.DebugInterceptor;
+import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 /**
@@ -18,10 +22,22 @@ public class ExampleApp extends Application {
         super.onCreate();
 
         Latte.init(this)
-                .WithApiHost("https://www.cnblogs.com/peitong/p/")
+                .WithApiHost("http://47.106.101.44:8080/data/")
                 .withIcon(new FontAwesomeModule())
-//                .withIcon(new FontEcModule())
+                .withIcon(new FontEcModule())
+//                .withInterceptor(new DebugInterceptor("",R.raw.test))
+                .withWeChatAppId("")
+                .withWeChatAppSecret("")
                 .configure();
+        initStetho();
+        DatabaseManager.getInstance().init(this);
+    }
 
+    private void initStetho() {
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                       .build());
     }
 }

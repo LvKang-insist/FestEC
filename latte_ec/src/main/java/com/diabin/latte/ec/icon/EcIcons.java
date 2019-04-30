@@ -11,6 +11,9 @@ import com.joanzapata.iconify.Icon;
  */
 public enum EcIcons implements Icon {
 
+    /**
+     *
+     */
     icon_scan('\ue694'),
     icon_oli_pay('\ue60b');
 

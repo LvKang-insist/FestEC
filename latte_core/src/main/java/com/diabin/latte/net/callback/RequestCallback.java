@@ -2,8 +2,9 @@ package com.diabin.latte.net.callback;
 
 import android.os.Handler;
 
-import com.diabin.latte.ui.LatteLoader;
-import com.diabin.latte.ui.LoaderStyle;
+import com.diabin.latte.app.Latte;
+import com.diabin.latte.ui.loader.LatteLoader;
+import com.diabin.latte.ui.loader.LoaderStyle;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +24,7 @@ public class RequestCallback implements Callback<String> {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final LoaderStyle LOADER_STYLE;
-    private final Handler HEADLER = new Handler();
+
 
     public RequestCallback(IReqeust request, ISuccess success, IFailure failure, IError error, LoaderStyle loaderStyle) {
         this.REQUEST = request;
@@ -36,6 +37,7 @@ public class RequestCallback implements Callback<String> {
 
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
+        //判断 如果code 在200到 三百之间 返回true
         if (response.isSuccessful()) {
             if (call.isExecuted()) {
                 if (SUCCESS != null) {
@@ -47,7 +49,6 @@ public class RequestCallback implements Callback<String> {
                 ERROR.OnError(response.code(), response.message());
             }
         }
-
         stopLoading();
     }
 
@@ -64,7 +65,7 @@ public class RequestCallback implements Callback<String> {
 
     private void stopLoading() {
         if (LOADER_STYLE != null) {
-            HEADLER.postDelayed(new Runnable() {
+            Latte.getHandler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     LatteLoader.stopLoading();

@@ -5,12 +5,17 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         //noinspection GradleDependency
         classpath 'com.android.tools.build:gradle:3.2.0'
         //noinspection GradleDependency
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+
+        //数据库
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
+
     }
 }
 
@@ -19,6 +24,7 @@ allprojects {
         mavenCentral()
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 

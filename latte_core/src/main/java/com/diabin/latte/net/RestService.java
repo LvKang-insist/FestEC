@@ -26,7 +26,7 @@ import retrofit2.http.Url;
  * @file: RestService
  * @author: 345
  * @Time: 2019/4/17 17:40
- * @description: ${DESCRIPTION}
+ * @description: Retrofit 的请求方法
  */
 public interface RestService {
     /**
@@ -38,6 +38,9 @@ public interface RestService {
     @GET
     Call<String> get(@Url String url , @QueryMap Map<String,Object> params);
 
+    /**
+     *  @FormUrlEncoded 表示请求体是一个Form 表单，
+     */
     @FormUrlEncoded
     @POST
     Call<String> post(@Url String url, @FieldMap Map<String, Object> params);
@@ -69,9 +72,7 @@ public interface RestService {
 
 
     /**
-     * @param url 地址
-     * @param file 参数
-     * @return 返回Call
+     * @Multipart : 表示请求体是一个支持文件上传的From 表单
      */
     @Multipart
     @POST

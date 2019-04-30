@@ -1,5 +1,8 @@
 package com.diabin.latte.app;
 
+import android.app.Activity;
+import android.content.Context;
+import android.renderscript.RenderScript;
 import android.util.Log;
 import android.view.inputmethod.InputContentInfo;
 
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.WeakHashMap;
 
+import okhttp3.Interceptor;
+
 /**
  * Copyright (C)
  * 文件名称: Configurator
@@ -20,9 +25,11 @@ import java.util.WeakHashMap;
  */
 public class Configurator {
     //配置信息
-    private static final HashMap<String, Object> LATTE_CONFIGS = new HashMap<>();
+    private static final HashMap<Object, Object> LATTE_CONFIGS = new HashMap<>();
     //存放 字体图标
     private  static final ArrayList<IconFontDescriptor> ICONS  = new ArrayList<>();
+
+    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     private Configurator() {
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
@@ -45,7 +52,7 @@ public class Configurator {
     /**
      * @return 返回配置信息
      */
-    final HashMap<String, Object> getLatteConfigs() {
+    final HashMap<Object, Object> getLatteConfigs() {
         return LATTE_CONFIGS;
     }
     /**
@@ -89,6 +96,37 @@ public class Configurator {
         return this;
     }
 
+    public final Configurator withInterceptor(Interceptor interceptor){
+        INTERCEPTORS.add(interceptor);
+        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR,interceptor);
+        return this;
+    }
+
+    public final Configurator withInterceptors(ArrayList<Interceptor> interceptors){
+        INTERCEPTORS.addAll(interceptors);
+        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
+        return this;
+    }
+
+
+    /**
+     * 微信
+     */
+    public final Configurator withWeChatAppId(String appId){
+        LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_ID,appId);
+        return this;
+    }
+    public final Configurator withWeChatAppSecret(String appSecret){
+        LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET,appSecret);
+        return this;
+    }
+
+    public final Configurator withActivity(Activity activity){
+        LATTE_CONFIGS.put(ConfigType.ACTIVITY,activity);
+        return this;
+    }
+
+
     /**
      * 获取配置，如果没有调用 configure() ,则没有配置成功，然后抛出异常
      */
@@ -100,14 +138,17 @@ public class Configurator {
     }
 
     /**
-     *
      * @param key 枚举对象，代表要查询的某项配置
      * @param <T> 调用的类型
      * @return 返回配置的信息。
      */
     @SuppressWarnings("unchecked")
-    final <T> T getConfiguration(Enum<ConfigType> key){
+    final <T> T getConfiguration(Object key){
         checkConfiguration(); //判断配置是否成功
-        return (T) LATTE_CONFIGS.get(key.name());
+        final Object value = LATTE_CONFIGS.get(key);
+        if (value == null){
+            throw new NullPointerException(key.toString()+"IS NULL");
+        }
+        return (T) LATTE_CONFIGS.get(key);
     }
 }

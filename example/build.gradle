@@ -36,4 +36,9 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':latte_ec')
     annotationProcessor project(':latte_compiler')
+
+    //添加stetho ，主要用来通过Chrome的 inspect命令 查看数据库的。初始化完成后
+    //在 浏览器中输入 chrome://inspect 找到需要调试的对象，点击 inspect 调试即可
+    //注意 ：这个需要网络，所以要加上okhttp3 的依赖，这个在core 里面添加过了
+    api 'com.facebook.stetho:stetho:1.5.0'
 }

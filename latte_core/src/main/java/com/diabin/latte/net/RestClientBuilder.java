@@ -6,7 +6,7 @@ import com.diabin.latte.net.callback.IError;
 import com.diabin.latte.net.callback.IFailure;
 import com.diabin.latte.net.callback.IReqeust;
 import com.diabin.latte.net.callback.ISuccess;
-import com.diabin.latte.ui.LoaderStyle;
+import com.diabin.latte.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;
@@ -21,7 +21,7 @@ import okhttp3.RequestBody;
  * @file: RestClientBuilder
  * @author: 345
  * @Time: 2019/4/17 19:48
- * @description: ${DESCRIPTION}
+ * @description: 建造者
  */
 public class RestClientBuilder {
     private String mUrl = null;

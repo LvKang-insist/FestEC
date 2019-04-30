@@ -1,4 +1,15 @@
 apply plugin: 'com.android.library'
+/**
+ * 我们在使用 butterknife 的时候一定要加入
+ *  apply plugin: 'com.jakewharton.butterknife'
+ *  annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+ *  否则 我们的项目会找不到 R2文件
+ */
+apply plugin: 'com.jakewharton.butterknife'
+/**
+ * 数据库的插件
+ */
+apply plugin: 'org.greenrobot.greendao'
 
 /**
  *  电商库
@@ -11,9 +22,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -29,4 +38,6 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':latte_core')
+    //noinspection GradleDependency
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
