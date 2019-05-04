@@ -1,5 +1,7 @@
 package com.diabin.latte.deleggate;
 
+import android.util.Log;
+
 /**
  * Copyright (C)
  * 文件名称: LatteDelegate
@@ -12,5 +14,4 @@ public abstract class LatteDelegate extends PermissionCheckerDelegate{
     public <T extends LatteDelegate> T getParentDelegate(){
         return (T)getParentFragment();
     }
-
 }

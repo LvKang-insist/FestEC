@@ -73,7 +73,6 @@ public class SignUpDelegate extends LatteDelegate   {
         startWithPop(new SignInDelegate());
     }
 
-
     private boolean checkForm() {
         final String name = mName.getText().toString();
         final String email = mEmail.getText().toString();

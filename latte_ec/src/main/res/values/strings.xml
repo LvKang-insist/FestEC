@@ -12,4 +12,6 @@
     <string name="scan">{icon-scan}</string>
     <string name="pay">{icon-oli-pay}</string>
     <string name="seek">搜索</string>
+    <string name="classify">分类</string>
+
 </resources>

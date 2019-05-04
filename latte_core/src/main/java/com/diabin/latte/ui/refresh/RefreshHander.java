@@ -2,6 +2,7 @@ package com.diabin.latte.ui.refresh;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -25,18 +26,19 @@ public class RefreshHander implements
         SwipeRefreshLayout.OnRefreshListener,
         BaseQuickAdapter.RequestLoadMoreListener {
 
-    private final SwipeRefreshLayout REFRESH_LAYOUT ;
+    private int mCount = 0;
+
+    private final SwipeRefreshLayout REFRESH_LAYOUT;
     private final PagingBean BEAN;
-    private final RecyclerView RECYCLERVIEW ;
+    private final RecyclerView RECYCLERVIEW;
     private MultipleRecyclerAdapter mAdapter = null;
     private final DataConverter CONVERTER;
 
 
-
     private RefreshHander(SwipeRefreshLayout refreshLayout,
-                         RecyclerView recyclerView,
-                         DataConverter converter,
-                         PagingBean bean) {
+                          RecyclerView recyclerView,
+                          DataConverter converter,
+                          PagingBean bean) {
         REFRESH_LAYOUT = refreshLayout;
         //监听滑动事件
         REFRESH_LAYOUT.setOnRefreshListener(this);
@@ -47,38 +49,42 @@ public class RefreshHander implements
 
     public static RefreshHander creawte(SwipeRefreshLayout swipeRefreshLayout,
                                         RecyclerView recyclerView,
-                                        DataConverter converter){
-        return new RefreshHander(swipeRefreshLayout,recyclerView,converter,new PagingBean());
+                                        DataConverter converter) {
+        return new RefreshHander(swipeRefreshLayout, recyclerView, converter, new PagingBean());
 
     }
 
-    private void refresh(){
+    private void refresh() {
         //要开始加载了
         REFRESH_LAYOUT.setRefreshing(true);
         Latte.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //刷新事件结束
+                mCount = 0;
+                firstPage("index.json");
             }
-        },2000);
+        }, 2000);
 
     }
 
-    public void firstPage(String url){
-                REFRESH_LAYOUT.setRefreshing(false);
+    public void firstPage(String url) {
+        REFRESH_LAYOUT.setRefreshing(false);
         BEAN.setDelayed(1000);
         RestClient.builder()
                 .url(url)
                 .success(new ISuccess() {
                     @Override
                     public void OnSuccess(String response) {
-                        final JSONObject object= JSON.parseObject(response);
+                        if (REFRESH_LAYOUT.isRefreshing()){
+                            REFRESH_LAYOUT.setRefreshing(false);
+                        }
+                        final JSONObject object = JSON.parseObject(response);
                         BEAN.setTotal(object.getInteger("total"))
                                 .setPageSize(object.getInteger("page_size"));
                         //设置Adapter
                         mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(response));
                         //该接口已经在本类中实现,当滑动到在最后一个item时回调
-                        mAdapter.setOnLoadMoreListener(RefreshHander.this,RECYCLERVIEW);
+                        mAdapter.setOnLoadMoreListener(RefreshHander.this, RECYCLERVIEW);
                         //设置适配器
                         RECYCLERVIEW.setAdapter(mAdapter);
                         BEAN.addIndex();
@@ -87,6 +93,7 @@ public class RefreshHander implements
                 .build()
                 .get();
     }
+
     @Override
     public void onRefresh() {
         refresh();
@@ -97,11 +104,12 @@ public class RefreshHander implements
      */
     @Override
     public void onLoadMoreRequested() {
+        Log.e("TAG", "onLoadMoreRequested: "+BEAN.getPageIndex() );
         //加载完成
 //        mAdapter.loadMoreComplete();
         //加载失败
 //        mAdapter.loadMoreFail();
         //没有更多数据
-        mAdapter.loadMoreEnd();
+
     }
 }

@@ -65,12 +65,12 @@ public class RequestCallback implements Callback<String> {
 
     private void stopLoading() {
         if (LOADER_STYLE != null) {
-            Latte.getHandler().postDelayed(new Runnable() {
+            Latte.getHandler().post(new Runnable() {
                 @Override
                 public void run() {
                     LatteLoader.stopLoading();
                 }
-            }, 10000);
+            });
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.diabin.latte.ec.main;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.diabin.latte.deleggate.bottom.BaseBottomDelegate;
 import com.diabin.latte.deleggate.bottom.BottomItemDelegate;
@@ -22,6 +23,7 @@ import java.util.LinkedHashMap;
 public class EcBottomDelegate extends BaseBottomDelegate {
     @Override
     public LinkedHashMap<BottomTabBean, BottomItemDelegate> setItems(ItemBuilder builder) {
+        Log.e("TAG", "setItems: "+getParentDelegate() );
         final LinkedHashMap<BottomTabBean, BottomItemDelegate> items = new LinkedHashMap<>();
         items.put(new BottomTabBean("{fa-home}","主页"),new IndexDelegate());
         items.put(new BottomTabBean("{fa-sort}","分类"),new SortDelegate());

@@ -17,7 +17,7 @@ import com.diabin.latte.net.callback.ISuccess;
  * 文件名称: ExampleDelegate
  * 创建人: 345
  * 创建时间: 2019/4/16 18:45
- * 描述: ${DESCRIPTION}
+ * 描述: 示例
  */
 public class ExampleDelegate extends LatteDelegate {
     @Override
@@ -37,8 +37,6 @@ public class ExampleDelegate extends LatteDelegate {
                        .success(new ISuccess() {
                            @Override
                            public void OnSuccess(String response) {
-
-                               Log.e("TAG", "OnSuccess: "+response );
 //                               Toast.makeText(Latte.getApplication(), response, Toast.LENGTH_SHORT).show();
                            }
                        })
