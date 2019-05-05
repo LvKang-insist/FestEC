@@ -97,6 +97,15 @@ dependencies {
     api 'org.greenrobot:greendao-generator:3.2.2'
     api 'org.greenrobot:greendao:3.2.2'
 
+
+    /*
+            微信依赖 + 这个+ 表示Gradle 选择自身的最高版本，其实不推荐这样玩的
+        也许我们的产品依赖于某个库的上一个版本
+            加上这一行注释
+            //noinspection GradleDynamicVersion
+            意思是说，告诉我们的AndroidStudio 不用在检查他了，我们正常使用，我们知道我们要做什么
+     */
+
     //微信依赖(包含统计)
     //noinspection GradleDynamicVersion
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
@@ -108,6 +117,13 @@ dependencies {
     api 'com.choices.divider:RecyclerView_Divider:1.0.0'
 
     //加载图片 的依赖
+    /*
+            图片处理 —— 添加依赖，可以让gilde使用 okhttp3的网络层
+        这样在网络上面的话可以进行一些优化和加速
+            4.0.0 包括自由的进行model 的扩展
+
+            annotationProcessor 代码生成器，使用注解可以帮助我们生成一个类。
+     */
    api 'com.github.bumptech.glide:glide:4.9.0'
     /* implementation 'com.android.support:support-v4:28.0.0'*/
 
@@ -119,6 +135,8 @@ dependencies {
     //Google AutoValue
     //provided ：表示这里面的代码是在编译期使用的，在apk打包完成后 这里面的代码将被废弃
     //compileOnly :provided 已经过时 被compileOnly取代
+    //noinspection GradleDependency
     compileOnly "com.google.auto.value:auto-value:1.2"
+    //noinspection GradleDependency
     annotationProcessor 'com.google.auto.value:auto-value:1.2'
 }

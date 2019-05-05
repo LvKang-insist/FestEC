@@ -2,10 +2,11 @@ package com.admin.festec.example;
 
 import android.app.Application;
 
+import com.admin.festec.example.event.TestEvent;
 import com.diabin.latte.app.Latte;
 import com.diabin.latte.ec.database.DatabaseManager;
 import com.diabin.latte.ec.icon.FontEcModule;
-import com.diabin.latte.net.interceptors.DebugInterceptor;
+import com.diabin.latte.net.rx.AddCookieInterceptor;
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
@@ -26,8 +27,13 @@ public class ExampleApp extends Application {
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
 //                .withInterceptor(new DebugInterceptor("",R.raw.test))
-                .withWeChatAppId("")
-                .withWeChatAppSecret("")
+                .withWeChatAppId("wxfcdcecd9df8e0faa")
+                .withWeChatAppSecret("a0560f75335b06e3ebea70f29ff29ff219bf")
+                .withJavaScriptInterface("latte")
+                .withWebEvent("test",new TestEvent())
+                //添加Cookie 同步部拦截器
+                .withWebHost("https:www.baidu.com")
+                .withInterceptor(new AddCookieInterceptor())
                 .configure();
         initStetho();
         DatabaseManager.getInstance().init(this);

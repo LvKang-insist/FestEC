@@ -13,5 +13,6 @@
     <string name="pay">{icon-oli-pay}</string>
     <string name="seek">搜索</string>
     <string name="classify">分类</string>
+    <string name="discover">发现</string>
 
 </resources>

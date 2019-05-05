@@ -3,9 +3,12 @@ package com.diabin.latte.app;
 import android.app.Activity;
 import android.content.Context;
 import android.renderscript.RenderScript;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.inputmethod.InputContentInfo;
 
+import com.diabin.latte.deleggate.web.event.Event;
+import com.diabin.latte.deleggate.web.event.EventManager;
 import com.joanzapata.iconify.Icon;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -24,9 +27,13 @@ import okhttp3.Interceptor;
  * 描述:  Configurator : 配置程序
  */
 public class Configurator {
-    //配置信息
+    /**
+     * 配置信息
+     */
     private static final HashMap<Object, Object> LATTE_CONFIGS = new HashMap<>();
-    //存放 字体图标
+    /**
+     * 存放 字体图标
+     */
     private  static final ArrayList<IconFontDescriptor> ICONS  = new ArrayList<>();
 
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
@@ -123,6 +130,26 @@ public class Configurator {
 
     public final Configurator withActivity(Activity activity){
         LATTE_CONFIGS.put(ConfigType.ACTIVITY,activity);
+        return this;
+    }
+
+
+    public Configurator withJavaScriptInterface(@NonNull String name){
+        LATTE_CONFIGS.put(ConfigType.JAVASCRIPT_INTERFACE,name);
+        return this;
+    }
+
+    public Configurator withWebEvent(@NonNull String name, @NonNull Event event){
+        final EventManager manager = EventManager.getInstance();
+        manager.addEvent(name,event);
+        return this;
+    }
+
+    /**
+     * 浏览器加载的 HOST
+     */
+    public Configurator withWebHost(String host){
+        LATTE_CONFIGS.put(ConfigType.WEB_HOST,host);
         return this;
     }
 

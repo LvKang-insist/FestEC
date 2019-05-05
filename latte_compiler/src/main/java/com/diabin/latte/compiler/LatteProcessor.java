@@ -40,7 +40,6 @@ public class LatteProcessor extends AbstractProcessor {
         final Set<String> types = new LinkedHashSet<>();
         final Set<Class<? extends Annotation>> supportAnnotations = getSupportedAnnotations();
         for (Class<? extends Annotation> annotation : supportAnnotations) {
-            System.out.println(annotation.getCanonicalName()+"-----------------");
             types.add(annotation.getCanonicalName());
         }
         return types;

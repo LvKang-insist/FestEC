@@ -43,9 +43,6 @@ public class SignHandler {
      */
     public static void onSignIn(UserProfile userProfile,ISignListener signListener){
         List<UserProfile> userProfiles = getDao().loadAll();
-        //测试用
-        AccountManager.setSignState(true);
-        signListener.onSignInSuccess();
         for(UserProfile up : userProfiles){
 
             if(up.getEmail().equals(userProfile.getEmail())){

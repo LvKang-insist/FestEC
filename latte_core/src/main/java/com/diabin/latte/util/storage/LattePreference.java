@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.diabin.latte.app.Latte;
 
+import java.security.Key;
+
 /**
  * Copyright (C)
  *
@@ -84,5 +86,22 @@ public class LattePreference {
     public static boolean booleangetAppFlag(String key){
         return getAppPreference()
                 .getBoolean(key,false);
+    }
+
+    /**
+     * sp set 方法
+     */
+    public static void setCustomAppProfile(String key,String val) {
+        getAppPreference()
+                .edit()
+                .putString(key, val)
+                .apply();
+    }
+
+    /**
+     *  sp get 方法
+     */
+    public static String getCustomAppProfile(String key) {
+        return getAppPreference().getString(key,"");
     }
 }

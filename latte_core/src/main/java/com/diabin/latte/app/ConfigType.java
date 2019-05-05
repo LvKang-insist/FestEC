@@ -6,6 +6,7 @@ package com.diabin.latte.app;
  * 创建人: 345
  * 创建时间: 2019/4/14 18:39
  * 描述: 在整个应用程序中 是一个单例，并且只能被初始化一次。
+ * @author Lv
  */
 public enum ConfigType {
     /**
@@ -23,5 +24,8 @@ public enum ConfigType {
     INTERCEPTOR,
     WE_CHAT_APP_ID,
     WE_CHAT_APP_SECRET,
-    ACTIVITY
+    ACTIVITY,
+    HANDLER,
+    JAVASCRIPT_INTERFACE,
+    WEB_HOST
 }
