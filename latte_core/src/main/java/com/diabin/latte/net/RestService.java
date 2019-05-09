@@ -46,7 +46,8 @@ public interface RestService {
     Call<String> post(@Url String url, @FieldMap Map<String, Object> params);
 
     /**
-     * 传入原始 数据就不能添加 @FormUrlEncoded 了
+     * 传入原始 数据就不能添加 @FormUrlEncoded 了\
+     * @Body 即非表单请求体，被body 注解的将会被Gson 转换为json 发送到服务器
      */
     @POST
     Call<String> postRaw(@Url String url, @Body RequestBody body);

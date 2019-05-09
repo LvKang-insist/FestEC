@@ -97,7 +97,7 @@
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/icon_sign_in_wechat"
-                android:text="{fa-weixin}"
+                android:text="@string/wechat"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:textSize="40sp"

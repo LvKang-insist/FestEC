@@ -64,7 +64,7 @@ public class ContentDelegate extends LatteDelegate {
                 .url("sort_content_list_data1.json")
                 .success(new ISuccess() {
                     @Override
-                    public void OnSuccess(String response) {
+                    public void onSuccess(String response) {
                         mData = new SectionDataConverter().convert(response);
                         final SectionAdapter sectionAdapter =
                                 new SectionAdapter(R.layout.item_section_content,

@@ -18,6 +18,8 @@ import com.diabin.latte.ui.recycler.MultipleViewHolder;
 
 import java.util.List;
 
+import me.yokeyword.fragmentation.SupportHelper;
+
 /**
  * Copyright (C)
  *
@@ -93,9 +95,11 @@ public class SortRecyclerAdapter extends MultipleRecyclerAdapter {
     }
 
     private void switchContent(ContentDelegate delegate){
-        final LatteDelegate contentDelegate = DELEGATE.findChildFragment(ContentDelegate.class);
+        // 找到 ContentDelegate
+        final LatteDelegate contentDelegate = SupportHelper.findFragment(DELEGATE.getChildFragmentManager(),ContentDelegate.class);
         if (contentDelegate != null){
-            contentDelegate.replaceFragment(delegate,false);
+            //加载 fragment
+            contentDelegate.getSupportDelegate().replaceFragment(delegate,false);
         }
     }
 }

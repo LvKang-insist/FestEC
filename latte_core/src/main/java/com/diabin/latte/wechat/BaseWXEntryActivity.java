@@ -63,7 +63,7 @@ public abstract class BaseWXEntryActivity  extends BaseWXActivity{
                 .url(authUrl)
                 .success(new ISuccess() {
                     @Override
-                    public void OnSuccess(String response) {
+                    public void onSuccess(String response) {
                        final JSONObject authObj = JSON.parseObject(response);
                        final String accessToKen = authObj.getString("access_token");
                        final String openId= authObj.getString("openid");
@@ -90,7 +90,7 @@ public abstract class BaseWXEntryActivity  extends BaseWXActivity{
                 .url(userInfoUrl)
                 .success(new ISuccess() {
                     @Override
-                    public void OnSuccess(String response) {
+                    public void onSuccess(String response) {
                         onSignInSuccess(response);
                     }
                 })

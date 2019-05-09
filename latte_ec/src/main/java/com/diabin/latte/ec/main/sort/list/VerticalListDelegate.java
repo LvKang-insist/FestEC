@@ -57,7 +57,7 @@ public class VerticalListDelegate extends LatteDelegate {
                 .loader(getContext())
                 .success(new ISuccess() {
                     @Override
-                    public void OnSuccess(String response) {
+                    public void onSuccess(String response) {
                         final List<MultipleItemEntity> data = new VerticalListDataConverter()
                                 .setJsonData(response)
                                 .convert();

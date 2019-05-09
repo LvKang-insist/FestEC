@@ -11,7 +11,6 @@ import com.diabin.latte.util.file.FileUtil;
 import java.io.File;
 import java.io.InputStream;
 
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**
@@ -58,7 +57,7 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
     protected void onPostExecute(File file) {
         super.onPostExecute(file);
         if (SUCCESS != null){
-            SUCCESS.OnSuccess(file.getPath());
+            SUCCESS.onSuccess(file.getPath());
         }
         if (REQUEST != null){
             REQUEST.onReqeustEnd();

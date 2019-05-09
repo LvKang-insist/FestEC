@@ -9,5 +9,5 @@ package com.diabin.latte.net.callback;
  * @description: ${DESCRIPTION}
  */
 public interface ISuccess {
-    void OnSuccess(String response);
+    void onSuccess(String response);
 }

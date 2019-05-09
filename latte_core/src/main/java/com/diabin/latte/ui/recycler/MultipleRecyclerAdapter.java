@@ -52,7 +52,7 @@ public class MultipleRecyclerAdapter extends
         /*
          * 设置不同的item 布局
          * addItemType 中的type 类型，必须和接收到的类型一模一样。
-         * 种类：有几种type ，就需要写几个addItemType，少些或者错写都会直接保存》
+         * 种类：有几种type ，就需要写几个addItemType，少些或者错写都会直接报错
          * 报错类型(javax.net.ssl.SSLHandshakeException: SSL handshake aborted: ......)
          */
         addItemType(ItemType.TEXT, R.layout.item_multiple_text);
@@ -68,9 +68,7 @@ public class MultipleRecyclerAdapter extends
     }
 
     /**
-     * 创建ViewHolder
-     * @param view
-     * @return
+     * 如果你想在适配器中使用BaseViewHolder的子类，您必须重写该方法来创建新的ViewHolder。
      */
     @Override
     protected MultipleViewHolder createBaseViewHolder(View view) {

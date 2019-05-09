@@ -15,6 +15,8 @@ public enum MultipleFields {
     ITEM_TYPE,
     //文本
     TEXT,
+
+    TITLE,
     //图片
     IMAGE_URL,
     //轮播图

@@ -74,7 +74,7 @@ public class RefreshHander implements
                 .url(url)
                 .success(new ISuccess() {
                     @Override
-                    public void OnSuccess(String response) {
+                    public void onSuccess(String response) {
                         if (REFRESH_LAYOUT.isRefreshing()){
                             REFRESH_LAYOUT.setRefreshing(false);
                         }

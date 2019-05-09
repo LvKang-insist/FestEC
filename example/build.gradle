@@ -11,6 +11,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -41,4 +43,6 @@ dependencies {
     //在 浏览器中输入 chrome://inspect 找到需要调试的对象，点击 inspect 调试即可
     //注意 ：这个需要网络，所以要加上okhttp3 的依赖，这个在core 里面添加过了
     api 'com.facebook.stetho:stetho:1.5.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 }

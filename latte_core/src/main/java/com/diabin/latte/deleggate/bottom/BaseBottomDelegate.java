@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -140,10 +141,10 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         }
         //返回一个数组，里边是fragment的。注意fragment 是继承 supportFragment 的，所以这里的集合是这个类型
         //fragmentation 需要我们这样做
-        final SupportFragment[] delegateArry = ITEM_DELEGATES.toArray(new SupportFragment[size]);
+        final ISupportFragment[] delegateArry = ITEM_DELEGATES.toArray(new ISupportFragment[size]);
         //加载多个同级根fragment,位于当前fragment中(也就是说加载的fragment是子fragment)，
         // 并显示其中一个，第二个参数为要显示的fragment
-        loadMultipleRootFragment(R.id.bottom_bar_delegate_container,mIndexDelegate,delegateArry);
+        getSupportDelegate().loadMultipleRootFragment(R.id.bottom_bar_delegate_container, mIndexDelegate, delegateArry);
     }
 
     /**
@@ -172,7 +173,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         itemTitle.setTextColor(mClickedColor);
 
         //第一次参数 为要显示的，第二个则是要隐藏的
-        showHideFragment(ITEM_DELEGATES.get(tag),ITEM_DELEGATES.get(mCurrentDelegate));
+        getSupportDelegate().showHideFragment(ITEM_DELEGATES.get(tag), ITEM_DELEGATES.get(mCurrentDelegate));
         // 记住当前显示 的下标，注意顺序
         mCurrentDelegate = tag;
     }

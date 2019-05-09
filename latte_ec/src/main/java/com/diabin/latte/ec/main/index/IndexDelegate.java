@@ -20,6 +20,7 @@ import com.diabin.latte.ec.R2;
 import com.diabin.latte.ec.main.EcBottomDelegate;
 import com.diabin.latte.ui.recycler.BaseDecoration;
 import com.diabin.latte.ui.refresh.RefreshHander;
+import com.diabin.latte.util.dimen.SetToolBar;
 import com.diabin.latte.util.dimen.StatusBarHeight;
 import com.joanzapata.iconify.widget.IconTextView;
 import butterknife.BindView;
@@ -51,7 +52,7 @@ public class IndexDelegate extends BottomItemDelegate {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        setToolBar();
+        SetToolBar.setToolBar(mToobar);
         mRefreshHandler = RefreshHander.creawte(mRefreshLayout,mRecyclerView,new IndexDataConverter());
     }
 

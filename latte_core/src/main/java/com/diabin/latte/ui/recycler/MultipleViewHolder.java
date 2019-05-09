@@ -14,7 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
  */
 public class MultipleViewHolder extends BaseViewHolder {
 
-    public MultipleViewHolder(View view) {
+    private MultipleViewHolder(View view) {
         super(view);
     }
 

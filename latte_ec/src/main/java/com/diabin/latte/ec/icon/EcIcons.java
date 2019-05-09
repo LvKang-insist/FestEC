@@ -14,8 +14,8 @@ public enum EcIcons implements Icon {
     /**
      *
      */
-    icon_scan('\ue694'),
-    icon_oli_pay('\ue60b');
+    icon_ali_pay('\ue694'),
+    icon_scan('\ue60b');
 
 
     private char character;

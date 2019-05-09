@@ -2,10 +2,8 @@ package com.diabin.latte.ec.main.discover;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
-import com.diabin.latte.deleggate.LatteDelegate;
 import com.diabin.latte.deleggate.bottom.BottomItemDelegate;
 import com.diabin.latte.deleggate.web.WebDelegateImpl;
 import com.diabin.latte.ec.R;
@@ -33,9 +31,9 @@ public class DiscoverDelegate extends BottomItemDelegate {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-//        final WebDelegateImpl delegate = WebDelegateImpl.create("http://47.106.101.44:8080/data/html/index.html");
-        final WebDelegateImpl delegate = WebDelegateImpl.create("https://www.baidu.com");
+        final WebDelegateImpl delegate = WebDelegateImpl.create("http://47.106.101.44:8080/data/html/index.html");
+//        final WebDelegateImpl delegate = WebDelegateImpl.create("https://www.baidu.com");
         delegate.setTopDelegate(getParentDelegate());
-        loadRootFragment(R.id.web_discovery_container,delegate);
+        getSupportDelegate().loadRootFragment(R.id.web_discovery_container,delegate);
     }
 }

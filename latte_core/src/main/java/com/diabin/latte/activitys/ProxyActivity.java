@@ -4,22 +4,29 @@ package com.diabin.latte.activitys;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ContentFrameLayout;
 
 import com.diabin.latte.R;
 import com.diabin.latte.deleggate.LatteDelegate;
 
+import me.yokeyword.fragmentation.ExtraTransaction;
+import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportActivityDelegate;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Copyright (C)
  * 文件名称: ProxyActivity
  * 创建人: 345
  * 创建时间: 2019/4/15 20:18
- * 描述:  Activity 继承自 SupportActivity
- *        Fragmentation 提供的 SupportActivity
+ * 描述:
  */
-public abstract class ProxyActivity extends SupportActivity {
+public abstract class ProxyActivity extends AppCompatActivity implements ISupportActivity {
+
+    public final SupportActivityDelegate DELEGATE = new SupportActivityDelegate(this);
 
     /**
      * @return 返回根 Delegate
@@ -29,6 +36,7 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DELEGATE.onCreate(savedInstanceState);
         initContainer(savedInstanceState);
     }
 
@@ -45,14 +53,52 @@ public abstract class ProxyActivity extends SupportActivity {
             //SupportActivity 独有的一个方法
             //加载根Fragment 即Activity的第一个Fragment ，或者Fragment内的第一个Fragment
             //即 加载碎片
-            loadRootFragment(R.id.delegate_container,setRootDelegate());
+            DELEGATE.loadRootFragment(R.id.delegate_container,setRootDelegate());
         }
     }
 
+
+
     @Override
     protected void onDestroy() {
+        DELEGATE.onDestroy();
         super.onDestroy();
         System.gc();
         System.runFinalization();
+    }
+
+    @Override
+    public SupportActivityDelegate getSupportDelegate() {
+        return DELEGATE;
+    }
+
+    @Override
+    public ExtraTransaction extraTransaction() {
+        return DELEGATE.extraTransaction();
+    }
+
+    @Override
+    public FragmentAnimator getFragmentAnimator() {
+        return DELEGATE.getFragmentAnimator();
+    }
+
+    @Override
+    public void setFragmentAnimator(FragmentAnimator fragmentAnimator) {
+        DELEGATE.setFragmentAnimator(fragmentAnimator);
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return DELEGATE.onCreateFragmentAnimator();
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        DELEGATE.onBackPressedSupport();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DELEGATE.onBackPressed();
     }
 }

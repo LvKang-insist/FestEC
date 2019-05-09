@@ -42,7 +42,7 @@ public class Router {
         //拿到父碎片
         final LatteDelegate topDelegate = delegate.getTopDelegate();
         final WebDelegateImpl webDelegate = WebDelegateImpl.create(url);
-        topDelegate.start(webDelegate);
+        topDelegate.getSupportDelegate().start(webDelegate);
         return true;
     }
 

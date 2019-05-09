@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
  * @file: MyScrollListener
  * @author: 345
  * @Time: 2019/4/30 14:34
- * @description: ${DESCRIPTION}
+ * @description: 标题栏的渐变效果
  */
 public class MyScrollListener extends RecyclerView.OnScrollListener {
 

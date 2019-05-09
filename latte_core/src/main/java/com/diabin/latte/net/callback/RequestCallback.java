@@ -1,7 +1,5 @@
 package com.diabin.latte.net.callback;
 
-import android.os.Handler;
-
 import com.diabin.latte.app.Latte;
 import com.diabin.latte.ui.loader.LatteLoader;
 import com.diabin.latte.ui.loader.LoaderStyle;
@@ -41,7 +39,7 @@ public class RequestCallback implements Callback<String> {
         if (response.isSuccessful()) {
             if (call.isExecuted()) {
                 if (SUCCESS != null) {
-                    SUCCESS.OnSuccess(response.body());
+                    SUCCESS.onSuccess(response.body());
                 }
             }
         } else {

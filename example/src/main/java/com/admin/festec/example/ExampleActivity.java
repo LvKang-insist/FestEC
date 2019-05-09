@@ -18,6 +18,7 @@ import com.diabin.latte.ec.sign.SignInDelegate;
 import com.diabin.latte.ui.loader.ILauncherListener;
 import com.diabin.latte.ui.loader.OnLauncherFinishTag;
 
+import me.yokeyword.fragmentation.ISupportFragment;
 import qiu.niorgai.StatusBarCompat;
 
 
@@ -47,8 +48,7 @@ public class ExampleActivity extends ProxyActivity implements
 
     @Override
     public void onSignInSuccess() {
-        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        startWithPop(new EcBottomDelegate());
+        getSupportDelegate().start(new EcBottomDelegate());
     }
 
     @Override
@@ -65,12 +65,10 @@ public class ExampleActivity extends ProxyActivity implements
     public void onLauncherFinish(OnLauncherFinishTag onLauncherFinishTag) {
         switch (onLauncherFinishTag) {
             case SIGNED:
-                Toast.makeText(this, "启动结束，用户登录了", Toast.LENGTH_SHORT).show();
-                startWithPop(new EcBottomDelegate());
+                getSupportDelegate().start(new EcBottomDelegate());
                 break;
             case NOT_SIGNED:
-                Toast.makeText(this, "启动结束，用户没登录", Toast.LENGTH_SHORT).show();
-                startWithPop(new SignInDelegate());
+                getSupportDelegate().start(new SignInDelegate());
                 break;
             default:
                 break;

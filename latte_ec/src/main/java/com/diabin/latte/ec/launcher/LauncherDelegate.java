@@ -70,7 +70,7 @@ public class LauncherDelegate extends BaseLauncherDelegate implements ITimeListe
      */
     private void checkIsShowScroll() {
         if (!LattePreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            startWithPop(new LauncherScrollDelegate());
+            getSupportDelegate().replaceFragment(new LauncherScrollDelegate(),false);
         } else {
             //判断是否登录 及后面的逻辑
             checkSignIn();
