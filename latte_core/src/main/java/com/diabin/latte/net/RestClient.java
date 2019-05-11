@@ -113,7 +113,7 @@ public class RestClient {
                 break;
             case UPLOAD:
 
-                /**
+                /*
                  *  RequestBody Json数据提交：
                  *  FormBody 表单数据提交:
                  *  MultipartBody 文件上传
@@ -127,7 +127,7 @@ public class RestClient {
                 break;
         }
         if (call != null) {
-            /**
+            /*
              *  发送请求
              *      同步：调用Call对象的execute()，返回结果的响应体
              *      异步：调用Call对象的enqueue()，参数是一个回调

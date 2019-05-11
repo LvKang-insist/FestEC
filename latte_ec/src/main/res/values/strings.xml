@@ -28,5 +28,7 @@
     <string name="wechat">{fa-weixin}</string>
     <string name="ali_pay">{icon-ali-pay}</string>
     <string name="cancel_pay">取消支付</string>
+    <string name="phone_number">电话</string>
+    <string name="name">姓名</string>
 
 </resources>

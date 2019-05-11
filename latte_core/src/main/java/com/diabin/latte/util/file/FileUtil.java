@@ -1,5 +1,6 @@
 package com.diabin.latte.util.file;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -45,7 +46,9 @@ import java.util.concurrent.RecursiveTask;
  * @description: ${DESCRIPTION}
  */
 public class FileUtil {
-    //格式化模板
+    /**
+    格式化模板
+     */
     public static final String TIME_FORMAT = "_yyyyMMdd_HHmmss";
 
     public static final String SDCARD_DIR = Environment.getExternalStorageDirectory().getPath();
@@ -62,11 +65,11 @@ public class FileUtil {
     public static final String CAMERA_PHOTO_DIR =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getParent();
 
-    public static String getTimeFormatName(String timeFormatHeader) {
-        Date date = new Date(System.currentTimeMillis());
 
+    private static String getTimeFormatName(String timeFormatHeader) {
+        Date date = new Date(System.currentTimeMillis());
         //必须加上 单引号
-        SimpleDateFormat dateFormat = new SimpleDateFormat("'" + timeFormatHeader + "'" + TIME_FORMAT);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("'" + timeFormatHeader + "'" + TIME_FORMAT);
 
         return dateFormat.format(date);
     }
@@ -370,6 +373,7 @@ public class FileUtil {
         } else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
             date = uri.getPath();
         } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            //从内容提供器中 查询数据
             final Cursor cursor = context.getContentResolver().query(uri, new String[]{
                             MediaStore.Images.ImageColumns.DATA}
                     , null, null, null);
@@ -380,8 +384,8 @@ public class FileUtil {
                         date = cursor.getString(index);
                     }
                 }
+                cursor.close();
             }
-            cursor.close();
         }
         return date;
     }

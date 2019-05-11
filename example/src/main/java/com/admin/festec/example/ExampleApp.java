@@ -10,6 +10,8 @@ import com.diabin.latte.net.rx.AddCookieInterceptor;
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Copyright (C)
  * 文件名称: ExampleApp
@@ -36,6 +38,12 @@ public class ExampleApp extends Application {
                 .withInterceptor(new AddCookieInterceptor())
                 .configure();
         initStetho();
+
+        //开启极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+
+        //初始化数据库
         DatabaseManager.getInstance().init(this);
     }
 

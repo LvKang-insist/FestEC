@@ -1,21 +1,16 @@
 package com.diabin.latte.app;
 
 import android.app.Activity;
-import android.content.Context;
-import android.renderscript.RenderScript;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.inputmethod.InputContentInfo;
 
+import com.blankj.utilcode.util.Utils;
 import com.diabin.latte.deleggate.web.event.Event;
 import com.diabin.latte.deleggate.web.event.EventManager;
-import com.joanzapata.iconify.Icon;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.WeakHashMap;
 
 import okhttp3.Interceptor;
 
@@ -66,6 +61,8 @@ public class Configurator {
      * 配置成功
      */
     public final void configure() {
+        //初始化 工具 UtilCode
+        Utils.init(Latte.getApplication());
         initIcons();//初始化 字体图片
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
     }
@@ -76,7 +73,6 @@ public class Configurator {
      */
     public final Configurator WithApiHost(String host){
         LATTE_CONFIGS.put(ConfigType.API_HOST.name(),host);
-
         return this;
     }
 

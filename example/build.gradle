@@ -11,8 +11,17 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
         multiDexEnabled true
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "0a165f404829a611b1aeafbb", //申请一个应用有会得到一个对应的key
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -31,18 +40,28 @@ android {
  *
  */
 dependencies {
-    //使用了 api 之后：不用重复的添加依赖文件，只要你依赖的某个module/library 有该依赖，则不需要重复添加依赖。
-    //implementation : 只能在内部使用该模块，比如我在一个library中使用 implementation 依赖了gson 库，
-    //然后我的主项目依赖了 library ，那么我的主项目就无法方法gson库中的方法。这样的好处是 编译速度回加快，
-    // 推荐使用implementation 方法去添加依赖，如果需要提供给外部访问，那么使用api 依赖即可。
+
+    /*
+        使用了 api 之后：不用重复的添加依赖文件，只要你依赖的某个module/library 有该依赖，则不需要重复添加依赖。
+    implementation : 只能在内部使用该模块，比如我在一个library中使用 implementation 依赖了gson 库，
+    然后我的主项目依赖了 library ，那么我的主项目就无法方法gson库中的方法。这样的好处是 编译速度回加快，
+    推荐使用implementation 方法去添加依赖，如果需要提供给外部访问，那么使用api 依赖即可。
+     */
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':latte_ec')
     annotationProcessor project(':latte_compiler')
 
-    //添加stetho ，主要用来通过Chrome的 inspect命令 查看数据库的。初始化完成后
-    //在 浏览器中输入 chrome://inspect 找到需要调试的对象，点击 inspect 调试即可
-    //注意 ：这个需要网络，所以要加上okhttp3 的依赖，这个在core 里面添加过了
+   /*
+        添加stetho ，主要用来通过Chrome的 inspect命令 查看数据库的。初始化完成后
+    在 浏览器中输入 chrome://inspect 找到需要调试的对象，点击 inspect 调试即可
+    注意 ：这个需要网络，所以要加上okhttp3 的依赖，这个在core 里面添加过了
+    */
     api 'com.facebook.stetho:stetho:1.5.0'
 
+
     implementation 'com.android.support:multidex:1.0.3'
+
+    //极光推送 依赖
+    api 'cn.jiguang.sdk:jpush:3.1.1'
+    api 'cn.jiguang.sdk:jcore:1.1.9'
 }

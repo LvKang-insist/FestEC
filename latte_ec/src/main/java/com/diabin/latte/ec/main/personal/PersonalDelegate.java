@@ -9,6 +9,7 @@ import android.view.View;
 import com.diabin.latte.deleggate.bottom.BottomItemDelegate;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
+import com.diabin.latte.ec.main.personal.addres.AddressDelegate;
 import com.diabin.latte.ec.main.personal.list.ListAdapter;
 import com.diabin.latte.ec.main.personal.list.ListBean;
 import com.diabin.latte.ec.main.personal.list.ListItemType;
@@ -72,6 +73,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListBean address = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
+                .setDelegate(new AddressDelegate())
                 .setText("收获地址")
                 .build();
 
@@ -90,5 +92,6 @@ public class PersonalDelegate extends BottomItemDelegate {
         mRvSettings.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         mRvSettings.setAdapter(adapter);
+        mRvSettings.addOnItemTouchListener(new PersonalClickListener(this));
     }
 }

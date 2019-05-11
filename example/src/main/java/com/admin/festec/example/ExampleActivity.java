@@ -18,6 +18,7 @@ import com.diabin.latte.ec.sign.SignInDelegate;
 import com.diabin.latte.ui.loader.ILauncherListener;
 import com.diabin.latte.ui.loader.OnLauncherFinishTag;
 
+import cn.jpush.android.api.JPushInterface;
 import me.yokeyword.fragmentation.ISupportFragment;
 import qiu.niorgai.StatusBarCompat;
 
@@ -41,9 +42,21 @@ public class ExampleActivity extends ProxyActivity implements
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
+    }
+
+    @Override
     public LatteDelegate setRootDelegate() {
         //程序启动，进入倒计时页面
-        return new LauncherDelegate();
+        return new EcBottomDelegate();
     }
 
     @Override
