@@ -12,5 +12,11 @@ public enum CallBackType {
     /**
      * 剪裁后的回调
      */
-    ON_CROP
+    ON_CROP,
+
+    /**
+     * 推送
+     */
+    PUSH
+
 }

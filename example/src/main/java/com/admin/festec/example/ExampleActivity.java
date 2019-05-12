@@ -17,6 +17,9 @@ import com.diabin.latte.ec.sign.ISignListener;
 import com.diabin.latte.ec.sign.SignInDelegate;
 import com.diabin.latte.ui.loader.ILauncherListener;
 import com.diabin.latte.ui.loader.OnLauncherFinishTag;
+import com.diabin.latte.util.callback.CallBackType;
+import com.diabin.latte.util.callback.CallbackManager;
+import com.diabin.latte.util.callback.IGlobalCallback;
 
 import cn.jpush.android.api.JPushInterface;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -30,6 +33,27 @@ public class ExampleActivity extends ProxyActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Latte.getConfigurator().withActivity(this);
+
+        CallbackManager.getInstance()
+                .addCallback(CallBackType.PUSH, new IGlobalCallback<Boolean>(){
+                    @Override
+                    public void executeCallBack(Boolean args) {
+                        //打开极光推送
+                        if (args){
+                            Toast.makeText(ExampleActivity.this, "推送打开", Toast.LENGTH_SHORT).show();
+                            //判断是 推送是否停止
+                            if (JPushInterface.isPushStopped(ExampleActivity.this)) {
+                                JPushInterface.resumePush(ExampleActivity.this);
+                            }
+                            //关闭极光推送
+                        }else {
+                            Toast.makeText(ExampleActivity.this, "推送关闭", Toast.LENGTH_SHORT).show();
+                            if (!JPushInterface.isPushStopped(ExampleActivity.this)){
+                                JPushInterface.stopPush(ExampleActivity.this);
+                            }
+                        }
+                    }
+                } );
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!= null){

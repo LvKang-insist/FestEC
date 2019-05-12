@@ -15,6 +15,7 @@ import com.diabin.latte.ec.main.personal.list.ListBean;
 import com.diabin.latte.ec.main.personal.list.ListItemType;
 import com.diabin.latte.ec.main.personal.order.OrderListDelegate;
 import com.diabin.latte.ec.main.personal.profile.UserProfileDelegate;
+import com.diabin.latte.ec.main.personal.settings.SettingsDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +81,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
+                .setDelegate(new SettingsDelegate())
                 .setText("系统设置")
                 .build();
 
