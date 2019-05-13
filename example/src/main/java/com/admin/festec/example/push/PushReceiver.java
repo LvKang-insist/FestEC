@@ -27,16 +27,19 @@ import cn.jpush.android.api.JPushInterface;
  * @description: ${DESCRIPTION}
  */
 public class PushReceiver extends BroadcastReceiver {
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onReceive(Context context, Intent intent) {
         final Bundle bundle = intent.getExtras();
-        final Set<String> keys = bundle.keySet();
-        JSONObject json = new JSONObject();
-        for (String key : keys){
-            final Object val = bundle.get(key);
-            json.put(key,val);
+
+        if (bundle.keySet() != null) {
+            final Set<String> keys = bundle.keySet();
+            JSONObject json = new JSONObject();
+            for (String key : keys) {
+                final Object val = bundle.get(key);
+                json.put(key, val);
+            }
         }
-        Log.e("", "onReceive: "+json.toJSONString() );
         final String pushAction = intent.getAction();
         if (pushAction.equals(JPushInterface.ACTION_NOTIFICATION_RECEIVED)){
             //处理接收到的消息
@@ -67,6 +70,7 @@ public class PushReceiver extends BroadcastReceiver {
         intent.putExtras(openActivityBundle);
         //另启了一个Activity ，清除了上面的Activity。
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //打开一个Activity
         ContextCompat.startActivity(context,intent,null);
     }
 }

@@ -22,7 +22,7 @@ import butterknife.BindView;
  * @file: AboutDelegate
  * @author: 345
  * @Time: 2019/5/12 10:04
- * @description: ${DESCRIPTION}
+ * @description: 关于
  */
 public class AboutDelegate extends LatteDelegate {
 

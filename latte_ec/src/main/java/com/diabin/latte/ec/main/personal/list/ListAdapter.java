@@ -22,7 +22,7 @@ import okhttp3.internal.http.HttpHeaders;
  * @file: ListAdapter
  * @author: 345
  * @Time: 2019/5/8 10:35
- * @description: ${DESCRIPTION}
+ * @description:  我的界面 通用的一个 RecyclerView的适配器
  */
 public class ListAdapter extends BaseMultiItemQuickAdapter<ListBean, BaseViewHolder> {
 

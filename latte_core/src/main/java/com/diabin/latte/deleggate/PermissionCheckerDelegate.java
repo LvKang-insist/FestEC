@@ -63,7 +63,6 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
     public void  start(){
         LatteCamera.start(this);
     }
-
     /**
      * 这个时代真正调用的方法
      */
