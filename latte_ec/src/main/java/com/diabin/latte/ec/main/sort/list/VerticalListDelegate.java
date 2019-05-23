@@ -13,6 +13,9 @@ import com.diabin.latte.ec.R2;
 import com.diabin.latte.ec.main.sort.SortDelegate;
 import com.diabin.latte.net.RestClient;
 import com.diabin.latte.net.callback.ISuccess;
+import com.diabin.latte.ui.loader.LatteLoader;
+import com.diabin.latte.ui.loader.LoaderCreator;
+import com.diabin.latte.ui.loader.LoaderStyle;
 import com.diabin.latte.ui.recycler.MultipleItemEntity;
 
 import java.util.List;

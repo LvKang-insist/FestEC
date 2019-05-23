@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.diabin.latte.app.Latte;
 import com.diabin.latte.ui.camera.CameraImageBean;
 import com.diabin.latte.ui.camera.LatteCamera;
 import com.diabin.latte.ui.camera.RequestCode;
+import com.diabin.latte.ui.scanner.ScannerDelegate;
 import com.diabin.latte.util.callback.CallBackType;
 import com.diabin.latte.util.callback.CallbackManager;
 import com.diabin.latte.util.callback.IGlobalCallback;
@@ -59,15 +61,24 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
     void startCamera() {
         LatteCamera.start(this);
     }
-
-    public void  start(){
-        LatteCamera.start(this);
-    }
     /**
      * 这个时代真正调用的方法
      */
     public void startCameraWithCheck() {
         PermissionCheckerDelegatePermissionsDispatcher.startCameraWithPermissionCheck(this);
+    }
+
+    /**
+     * 扫描二维码（不直接调用）
+     */
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void startScan(BaseDelegate delegate){
+        //带返回值的方式启动
+        delegate.getSupportDelegate().startForResult(new ScannerDelegate(),RequestCode.SCAN);
+    }
+
+    public void startScanWithCheck(LatteDelegate delegate){
+        PermissionCheckerDelegatePermissionsDispatcher.startScanWithPermissionCheck(this,delegate);
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
@@ -139,7 +150,6 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
                     }
                     break;
                 case RequestCode.CROP_PHOTO:
-                    System.out.println("00000000000000000000000000000");
                     final Uri cropUri = UCrop .getOutput(data);
                     //拿到剪裁后的数据进行处理
                     final IGlobalCallback<Uri> callback = CallbackManager

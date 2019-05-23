@@ -36,5 +36,6 @@
     <string name="grade">评分</string>
     <string name="cancel">取消</string>
     <string name="undetermined">待定</string>
+    <string name="clear_history">点击清空历史记录</string>
 
 </resources>

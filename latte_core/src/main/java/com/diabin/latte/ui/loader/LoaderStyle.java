@@ -10,6 +10,9 @@ package com.diabin.latte.ui.loader;
  */
 @SuppressWarnings("unused")
 public enum LoaderStyle {
+    /**
+     *  加载动画
+     */
     BallPulseIndicator,
     BallGridPulseIndicator,
     BallClipRotateIndicator,

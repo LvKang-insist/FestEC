@@ -89,7 +89,6 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         mUnbinder = ButterKnife.bind(this, rootView);
         //子类 实现，传入 Bundle 和 碎片视图
         onBindView(savedInstanceState, rootView);
-
         return rootView;
     }
 

@@ -18,11 +18,11 @@ public final class Latte {
 
     /**
      * @return 返回一个handler 对象
-     *
      */
-    public static Handler getHandler(){
+    public static Handler getHandler() {
         return HEADLER;
     }
+
     /**
      * @param context context
      * @return 返回配置对象

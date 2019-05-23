@@ -68,7 +68,6 @@ public class RefreshHander implements
     }
 
     public void firstPage(String url) {
-        REFRESH_LAYOUT.setRefreshing(false);
         BEAN.setDelayed(1000);
         RestClient.builder()
                 .url(url)
@@ -94,22 +93,42 @@ public class RefreshHander implements
                 .get();
     }
 
+    private void paging(String url){
+        final int pageSize = BEAN.getPageSize();
+        final int currentCount =BEAN.getCurrentCount();
+        final int total = BEAN.getmTotal();
+        final int index = BEAN.getPageIndex();
+
+        if (index > 2 ){
+            mAdapter.loadMoreEnd(true);
+        }else {
+            Log.e("---------------------", "paging: "+url+index );
+            RestClient.builder()
+                    .url(url+index+".json")
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSuccess(String response) {
+                            mAdapter.addData(CONVERTER.setJsonData(response).convert());
+                            mAdapter.loadMoreComplete();
+                            //累加数量
+                            BEAN.setCurrentCount(mAdapter.getData().size());
+                            BEAN.addIndex();
+                        }
+                    })
+                    .build()
+                    .get();
+        }
+    }
+
     @Override
     public void onRefresh() {
         refresh();
     }
-
     /**
      * 当滑动到最后一个item时 回调
      */
     @Override
     public void onLoadMoreRequested() {
-        Log.e("TAG", "onLoadMoreRequested: "+BEAN.getPageIndex() );
-        //加载完成
-//        mAdapter.loadMoreComplete();
-        //加载失败
-//        mAdapter.loadMoreFail();
-        //没有更多数据
-
+        paging("refresh");
     }
 }

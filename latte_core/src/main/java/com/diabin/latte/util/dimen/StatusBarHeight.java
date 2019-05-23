@@ -27,8 +27,6 @@ public class StatusBarHeight {
 
     /**
      *  根据手机的分辨率 从 px(像素)的单位 转换为 dp
-     * @param pxValue
-     * @return
      */
     public static int px2dip(float pxValue){
         final float scale = Latte.getApplication().getResources().getDisplayMetrics().density;

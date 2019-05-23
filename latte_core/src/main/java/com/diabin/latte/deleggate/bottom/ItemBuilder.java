@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
  * @description: 工厂类，用来构建 导航栏 和 碎片
  */
 public final class ItemBuilder {
+
     private final LinkedHashMap<BottomTabBean,BottomItemDelegate> ITEMS = new LinkedHashMap<>();
 
     static ItemBuilder builder(){

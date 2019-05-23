@@ -26,7 +26,7 @@ public final class PagingBean {
      */
     private int mCurrentCount = 0;
     /**
-     * 当前已经显示了几条数据
+     * 当前
      */
     private int Delayed = 0;
 

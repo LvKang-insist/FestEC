@@ -63,6 +63,7 @@ public class LatteLoader {
     }
 
     public static void showLoading(Context context) {
+        //自定义 一个默认的 加载动画
         showLoading(context, DEFULT_LOADER);
     }
 

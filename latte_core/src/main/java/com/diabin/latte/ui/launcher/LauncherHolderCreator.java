@@ -28,7 +28,6 @@ public class LauncherHolderCreator implements CBViewHolderCreator{
     @Override
     public int getLayoutId() {
         //设置 加载的布局
-
         return R.layout.launcher_icon;
     }
 }

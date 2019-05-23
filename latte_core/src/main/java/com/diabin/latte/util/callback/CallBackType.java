@@ -17,6 +17,11 @@ public enum CallBackType {
     /**
      * 推送
      */
-    PUSH
+    PUSH,
+
+    /**
+     *  二维码
+     */
+    ON_SCAN
 
 }

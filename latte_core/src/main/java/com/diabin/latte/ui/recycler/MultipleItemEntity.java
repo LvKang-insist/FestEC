@@ -18,8 +18,6 @@ public class MultipleItemEntity implements MultiItemEntity {
 
     private final LinkedHashMap<Object, Object> MULTIPLE_FIELDS = new LinkedHashMap<>();
     private final ReferenceQueue<LinkedHashMap<Object, Object>> ITEM_QUENE = new ReferenceQueue<>();
-
-
     /**
      * 软引用：SoftReference
      *       如果内存空间足够，垃圾回收器绝不会回收他，如果内存不足，则会回收这些对象的内存。

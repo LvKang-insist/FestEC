@@ -25,7 +25,6 @@ public class DatabaseManager {
         initDao(context);
         return this;
     }
-
     /**
      * 内部类 的单例模式
      */

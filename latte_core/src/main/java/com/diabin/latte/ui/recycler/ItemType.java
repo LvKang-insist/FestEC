@@ -21,4 +21,6 @@ public class ItemType {
      * 分类页面的 type
      */
     public static final int VERTICAL_MENU_LIST = 5;
+
+    public static final int SINGLE_BIG_IAMGE = 6;
 }
