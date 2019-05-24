@@ -1,7 +1,6 @@
 package com.diabin.latte.net.download;
 
 import android.os.AsyncTask;
-import android.support.v4.app.NavUtils;
 
 import com.diabin.latte.net.RestCreator;
 import com.diabin.latte.net.callback.IError;
@@ -9,7 +8,6 @@ import com.diabin.latte.net.callback.IFailure;
 import com.diabin.latte.net.callback.IReqeust;
 import com.diabin.latte.net.callback.ISuccess;
 
-import java.awt.font.TextAttribute;
 import java.util.WeakHashMap;
 
 import okhttp3.ResponseBody;
@@ -88,6 +86,5 @@ public class DownloadHandler {
                         }
                     }
                 });
-
     }
 }

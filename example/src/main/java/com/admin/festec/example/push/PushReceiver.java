@@ -5,17 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.admin.festec.example.ExampleActivity;
 import com.alibaba.fastjson.JSONObject;
-import com.diabin.latte.app.Latte;
-
 
 import java.util.Set;
 
-import cn.jpush.android.api.JPluginPlatformInterface;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -24,7 +19,7 @@ import cn.jpush.android.api.JPushInterface;
  * @file: PushReceiver
  * @author: 345
  * @Time: 2019/5/11 17:41
- * @description: ${DESCRIPTION}
+ * @description: 广播
  */
 public class PushReceiver extends BroadcastReceiver {
     @SuppressWarnings("ConstantConditions")

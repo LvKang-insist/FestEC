@@ -58,7 +58,7 @@ public class RestClient {
                       LoaderStyle LoaderStyle,
                       Context context) {
         this.URL = url;
-        params.putAll(params);
+        PARAMS.putAll(params);
         this.DOWNLOAD_DIR = download_dir;
         this.EXTENSION = extension;
         this.NAME = name;
@@ -112,7 +112,6 @@ public class RestClient {
                 call = service.delete(URL, PARAMS);
                 break;
             case UPLOAD:
-
                 /*
                  *  RequestBody Json数据提交：
                  *  FormBody 表单数据提交:

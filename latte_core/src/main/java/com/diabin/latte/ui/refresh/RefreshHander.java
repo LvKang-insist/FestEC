@@ -2,13 +2,10 @@ package com.diabin.latte.ui.refresh;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.diabin.latte.app.Latte;
 import com.diabin.latte.net.RestClient;
 import com.diabin.latte.net.callback.ISuccess;
 import com.diabin.latte.ui.recycler.DataConverter;
@@ -56,17 +53,8 @@ public class RefreshHander implements
 
     private void refresh() {
         //要开始加载了
-        REFRESH_LAYOUT.setRefreshing(true);
-        Latte.getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mCount = 0;
-                firstPage("index.json");
-            }
-        }, 2000);
-
+        firstPage("index.json");
     }
-
     public void firstPage(String url) {
         BEAN.setDelayed(1000);
         RestClient.builder()
@@ -74,8 +62,13 @@ public class RefreshHander implements
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        if (REFRESH_LAYOUT.isRefreshing()){
+                        if (REFRESH_LAYOUT.isRefreshing()) {
                             REFRESH_LAYOUT.setRefreshing(false);
+                        }
+                        if (mAdapter != null) {
+                            if (mAdapter.getData().size() > 0) {
+                                mAdapter.getData().clear();
+                            }
                         }
                         final JSONObject object = JSON.parseObject(response);
                         BEAN.setTotal(object.getInteger("total"))
@@ -87,32 +80,33 @@ public class RefreshHander implements
                         //设置适配器
                         RECYCLERVIEW.setAdapter(mAdapter);
                         BEAN.addIndex();
+                        mAdapter.loadMoreComplete();
                     }
                 })
                 .build()
                 .get();
     }
 
-    private void paging(String url){
+    private void paging(String url) {
         final int pageSize = BEAN.getPageSize();
-        final int currentCount =BEAN.getCurrentCount();
+        final int currentCount = BEAN.getCurrentCount();
         final int total = BEAN.getmTotal();
         final int index = BEAN.getPageIndex();
 
-        if (index > 2 ){
-            mAdapter.loadMoreEnd(true);
-        }else {
-            Log.e("---------------------", "paging: "+url+index );
+        if (index > 2) {
+            mAdapter.loadMoreEnd(false);
+        } else {
             RestClient.builder()
-                    .url(url+index+".json")
+                    .url(url + index + ".json")
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {
-                            mAdapter.addData(CONVERTER.setJsonData(response).convert());
-                            mAdapter.loadMoreComplete();
+                            mAdapter.setNewData(CONVERTER.setJsonData(response).convert());
                             //累加数量
                             BEAN.setCurrentCount(mAdapter.getData().size());
                             BEAN.addIndex();
+
+                            mAdapter.notifyItemRangeChanged(0,mAdapter.getItemCount());
                         }
                     })
                     .build()

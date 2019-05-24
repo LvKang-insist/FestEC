@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ContentFrameLayout;
 
 import com.diabin.latte.R;
@@ -13,7 +12,6 @@ import com.diabin.latte.deleggate.LatteDelegate;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
-import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportActivityDelegate;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
@@ -44,8 +42,9 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
      * 初始化 视图
      * @param savedInstanceState 保存的数据
      */
+    @SuppressLint("RestrictedApi")
     private void initContainer(@Nullable Bundle savedInstanceState) {
-        @SuppressLint("RestrictedApi") final ContentFrameLayout container = new ContentFrameLayout(this);
+         final ContentFrameLayout container = new ContentFrameLayout(this);
         //设置这个视图的Id
         container.setId(R.id.delegate_container);
         setContentView(container);

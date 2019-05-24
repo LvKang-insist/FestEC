@@ -1,6 +1,5 @@
 package com.diabin.latte.util.callback;
 
-import java.util.Observable;
 import java.util.WeakHashMap;
 
 /**
@@ -9,7 +8,7 @@ import java.util.WeakHashMap;
  * @file: CallbackManager
  * @author: 345
  * @Time: 2019/5/9 15:05
- * @description: ${DESCRIPTION}
+ * @description: 全局 接口的管理
  */
 public class CallbackManager {
     private static final WeakHashMap<Object,IGlobalCallback> CALLBACKS = new WeakHashMap<>();

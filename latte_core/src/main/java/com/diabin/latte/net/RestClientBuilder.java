@@ -35,9 +35,9 @@ public class RestClientBuilder {
     private LoaderStyle mLoaderStyle = null;
     private File mFile = null;
 
-    private  String mDownloadDir = null;
-    private  String mExtenstion = null;
-    private  String mName = null;
+    private String mDownloadDir = null;
+    private String mExtenstion = null;
+    private String mName = null;
 
     RestClientBuilder() {
     }
@@ -91,35 +91,35 @@ public class RestClientBuilder {
         this.mIError = iError;
         return this;
     }
-    public final RestClientBuilder loader(Context context,LoaderStyle style){
+
+    public final RestClientBuilder loader(Context context, LoaderStyle style) {
         this.mContext = context;
         this.mLoaderStyle = style;
         return this;
     }
 
-    public final RestClientBuilder loader(Context context){
+    public final RestClientBuilder loader(Context context) {
         this.mContext = context;
-        this.mLoaderStyle =  LoaderStyle.BallClipRotatePulseIndicator;
+        this.mLoaderStyle = LoaderStyle.BallClipRotatePulseIndicator;
         return this;
     }
 
-    public final RestClientBuilder dir(String dir){
+    public final RestClientBuilder dir(String dir) {
         this.mDownloadDir = dir;
         return this;
     }
 
-    public final RestClientBuilder extension(String extension){
+    public final RestClientBuilder extension(String extension) {
         this.mExtenstion = extension;
         return this;
     }
 
-    public final RestClientBuilder name(String name){
+    public final RestClientBuilder name(String name) {
         this.mName = name;
         return this;
     }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS,mDownloadDir,mExtenstion,mName, mIrequest, mISuccess, mIFailure, mIError, mBody,mFile,mLoaderStyle,mContext);
+        return new RestClient(mUrl, PARAMS, mDownloadDir, mExtenstion, mName, mIrequest, mISuccess, mIFailure, mIError, mBody, mFile, mLoaderStyle, mContext);
     }
-
 }
