@@ -54,6 +54,7 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return TAB_TITLES.size();
     }
+
     /**
      * 每一个tab 上面的文字。
      */

@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.diabin.latte.deleggate.bottom.BottomItemDelegate;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
-import com.diabin.latte.ec.main.EcBottomDelegate;
 import com.diabin.latte.ec.main.index.search.SearchDelegate;
 import com.diabin.latte.ui.recycler.BaseDecoration;
 import com.diabin.latte.ui.refresh.RefreshHander;
@@ -96,9 +95,8 @@ public class IndexDelegate extends BottomItemDelegate {
         mRecyclerView.setLayoutManager(manager);
         //设置分割线
         mRecyclerView.addItemDecoration(BaseDecoration.create(ContextCompat.getColor(getContext(), R.color.app_background), 5));
-        final EcBottomDelegate ecBottomDelegate  = getParentDelegate();
         //监听事件
-        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(ecBottomDelegate));
+        mRecyclerView.addOnItemTouchListener(IndexItemClickListener.create(this));
         //滑动监听，设置 toolbar
         mRecyclerView.addOnScrollListener(MyScrollListener.create(mToobar));
     }

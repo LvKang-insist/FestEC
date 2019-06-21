@@ -16,6 +16,7 @@ public class WXPayEntryTemplate extends ProxyActivity {
     public LatteDelegate setRootDelegate() {
         return null;
     }
+
     /*
     @Override
     protected void onPaySuccess() {

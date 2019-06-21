@@ -25,8 +25,7 @@ public class ExampleApp extends Application {
         super.onCreate();
 
         Latte.init(this)
-//                .WithApiHost("http://47.106.101.44:8080/data/")
-                .WithApiHost("http://192.168.1.102:8090/Api/")
+                .WithApiHost("http://47.106.101.44:8080/data/")
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
 //                .withInterceptor(new DebugInterceptor("",R.raw.test))

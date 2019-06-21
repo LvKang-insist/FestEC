@@ -143,7 +143,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
     }
 
     private void initPager(JSONObject data) {
-        final PagerAdapter adapter = new TabPagerAdapter(getFragmentManager(), data);
+        final PagerAdapter adapter = new TabPagerAdapter(getChildFragmentManager(), data);
         mViewPager.setAdapter(adapter);
     }
 
@@ -156,6 +156,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         mTabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
         //背景色
         mTabLayout.setBackgroundColor(Color.WHITE);
+        //设置ViewPager
         mTabLayout.setupWithViewPager(mViewPager);
     }
 

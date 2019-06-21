@@ -3,9 +3,7 @@ package com.diabin.latte.ec.main.index;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.chad.library.adapter.base.listener.SimpleClickListener;
-import com.diabin.latte.app.Latte;
 import com.diabin.latte.deleggate.LatteDelegate;
 import com.diabin.latte.ec.detail.GoodsDetailDelegate;
 import com.diabin.latte.ui.recycler.MultipleFields;
@@ -37,7 +35,7 @@ public class IndexItemClickListener extends SimpleClickListener {
         final MultipleItemEntity entity = (MultipleItemEntity) baseQuickAdapter.getData().get(position);
         final int goodsId = entity.getField(MultipleFields.ID);
         final GoodsDetailDelegate delegate= GoodsDetailDelegate.create(goodsId);
-        DELEGATE.getSupportDelegate().start(delegate);
+        DELEGATE.getParentDelegate().getSupportDelegate().start(delegate);
     }
     /**
      * 长点击

@@ -16,15 +16,12 @@ import com.diabin.latte.R2;
 import com.diabin.latte.deleggate.LatteDelegate;
 import com.joanzapata.iconify.widget.IconTextView;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.PropertyResourceBundle;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.ISupportFragment;
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Copyright (C)
@@ -35,6 +32,8 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @description: 对所有的键值对进行管理，也就是 碎片和tab，这是一个抽象类。
  */
 public abstract class BaseBottomDelegate extends LatteDelegate implements View.OnClickListener {
+
+    private static final String TAG = "BaseBottomDelegate";
 
     /**
      * 存储所有的子 Fragment
@@ -91,6 +90,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.e(TAG, "onCreate: 执行");
 
         mIndexDelegate = setIndexDelegate();
         if (setClickedColor() != 0){
@@ -114,7 +114,6 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         final int size = ITEMS.size();
-
         for (int i = 0; i < size; i++) {
             //第一个参数 布局，第二个参数 为给第一个参数加载的布局 设置一个父布局
             LayoutInflater.from(getContext()).inflate(R.layout.bottom_item_icon_text_layout,mBottomBar);
@@ -145,6 +144,7 @@ public abstract class BaseBottomDelegate extends LatteDelegate implements View.O
         //加载多个同级根fragment,位于当前fragment中(也就是说加载的fragment是子fragment)，
         // 并显示其中一个，第二个参数为要显示的fragment
         getSupportDelegate().loadMultipleRootFragment(R.id.bottom_bar_delegate_container, mIndexDelegate, delegateArry);
+        mCurrentDelegate = mIndexDelegate;
     }
 
     /**

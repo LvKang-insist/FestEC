@@ -19,7 +19,6 @@ import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
-import retrofit2.http.DELETE;
 
 /**
  * Copyright (C)
@@ -97,6 +96,12 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
      */
     public final ProxyActivity getProxyActivity(){
         return (ProxyActivity) _mActivity;
+    }
+
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 
     @Override

@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
-import com.diabin.latte.app.Latte;
 import com.diabin.latte.deleggate.LatteDelegate;
 import com.diabin.latte.ec.R;
 import com.diabin.latte.ec.R2;
@@ -28,8 +26,6 @@ import butterknife.OnClick;
  * @description: 登录界面
  */
 public class SignInDelegate extends LatteDelegate {
-
-    private  int i = 0;
 
     @BindView(R2.id.edit_sign_in_email)
     TextInputEditText mEmail = null;

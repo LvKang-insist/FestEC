@@ -57,13 +57,17 @@ public abstract class ProxyActivity extends AppCompatActivity implements ISuppor
     }
 
 
-
     @Override
     protected void onDestroy() {
         DELEGATE.onDestroy();
         super.onDestroy();
         System.gc();
         System.runFinalization();
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 
     @Override

@@ -54,7 +54,7 @@ dependencies {
     }
 
     //Fragment 依赖
-    api 'me.yokeyword:fragmentation:1.0.3'
+    api 'me.yokeyword:fragmentation:1.3.7'
 
     //在边缘上滑动可以回到上一个界面
 
@@ -71,10 +71,10 @@ dependencies {
          */
 
     //noinspection GradleDependency
-    api 'com.jakewharton:butterknife:8.4.0'
+    api 'com.jakewharton:butterknife:9.0.0-rc1'
 
     //noinspection GradleDependency
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
 
     //网络请求依赖
     api 'com.squareup.okhttp3:okhttp:3.12.0'
@@ -183,4 +183,6 @@ dependencies {
     api 'com.nineoldandroids:library:2.4.0'
     api 'com.daimajia.easing:library:1.0.1@aar'
     api 'com.daimajia.androidanimations:library:1.1.3@aar'
+
+
 }

@@ -1,20 +1,16 @@
 package com.admin.festec.example;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.view.View;
 import android.widget.Toast;
+
 import com.diabin.latte.activitys.ProxyActivity;
 import com.diabin.latte.app.Latte;
 import com.diabin.latte.deleggate.LatteDelegate;
 import com.diabin.latte.ec.launcher.LauncherDelegate;
 import com.diabin.latte.ec.main.EcBottomDelegate;
 import com.diabin.latte.ec.sign.ISignListener;
-import com.diabin.latte.ec.sign.SignInDelegate;
 import com.diabin.latte.ui.loader.ILauncherListener;
 import com.diabin.latte.ui.loader.OnLauncherFinishTag;
 import com.diabin.latte.util.callback.CallBackType;
@@ -22,7 +18,6 @@ import com.diabin.latte.util.callback.CallbackManager;
 import com.diabin.latte.util.callback.IGlobalCallback;
 
 import cn.jpush.android.api.JPushInterface;
-import me.yokeyword.fragmentation.ISupportFragment;
 import qiu.niorgai.StatusBarCompat;
 
 
@@ -80,7 +75,7 @@ public class ExampleActivity extends ProxyActivity implements
     @Override
     public LatteDelegate setRootDelegate() {
         //程序启动，进入倒计时页面
-        return new EcBottomDelegate();
+        return new LauncherDelegate();
     }
 
     @Override
@@ -102,10 +97,10 @@ public class ExampleActivity extends ProxyActivity implements
     public void onLauncherFinish(OnLauncherFinishTag onLauncherFinishTag) {
         switch (onLauncherFinishTag) {
             case SIGNED:
-                getSupportDelegate().start(new EcBottomDelegate());
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
+//                getSupportDelegate().startWithPop(new SignInDelegate());
                 break;
             case NOT_SIGNED:
-                getSupportDelegate().start(new SignInDelegate());
                 break;
             default:
                 break;
